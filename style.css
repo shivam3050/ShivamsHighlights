@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    color:#ffffff
+}
+body {
+    background-color: #3f3f3f;
+    display: flex;
+    align-items: center;
+    min-width: 550px;
+    
+}
+
+
+.back_div {
+    background-color: #212121;
+    width:70vw;
+    height:90vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    border-radius: 20px;
+    border: 1px solid #181818;
+    box-sizing: border-box;
+    box-shadow:
+    0 0 8px rgba(255, 0, 255, 0.4),
+    0 0 18px rgba(0, 255, 255, 0.3),  
+    0 0 38px rgba(51, 51, 255, 0.2);
+    padding: 1vw;
+}
+.back_div header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    margin-top: 2vh;
+}
+header div {
+    width:50%;
+    font-size:1rem;
+    font-weight: 800;
+    font-family: cursive;
+    cursor: context-menu;
+}
+header div span {
+    width:50%;
+    font-size:1rem;
+    font-weight: 800;
+    font-family: cursive;
+    color:#ff02ee
+}
+
+header ul {
+    width:50%;
+    font-size: 0.8rem;
+    font-weight: 800;
+    font-family: cursive;
+}
+.nav_buttons li {
+    list-style: none;
+}
+.nav_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.nav_buttons li:hover {
+    color:#ff02ee;
+    cursor: pointer;
+    /* cursor: context-menu; */
+}
+body .back_div main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:5vw;
+    padding-top: 20vh;
+    box-sizing: border-box;
+    height: 60vh;
+}
+main .back_details_div{
+    width: 50%;
+    font-family: cursive;
+    /* font-size: 2rem; */
+    display:grid;
+    align-items: center;
+    gap:5%
+}
+main .back_details_div span{
+    width: 50%;
+    font-family: cursive;
+    color:#ff02ee
+}
+.profile_photo_div .back_div main{
+    width: 90%;
+    text-align: center;
+    /* border-radius: 50%; */
+    /* border-radius: 50%; */
+    /* border: 10px solid #ff02ee; */
+}
+.profile_photo_div img {
+    width:clamp(250px,30vw,500px);
+    height: clamp(250px,30vw,500px);
+    /* background-repeat: no-repeat; */
+    object-fit: cover;
+    /* clip-path: circle(); */
+    border-radius: 50%; 
+    border: 2px solid #ff02ee;
+    box-shadow: 0 0 20px 4px #ff02ee
+}
+.back_details_div footer {
+    display: flex;
+    margin-top: 8%;
+    gap: 2%;
+}
+
+.side_front_div {
+    border: 2px solid black;
+    width: 22vw;
+    height: 76vh;
+    position: absolute;
+    right:0px;
+    margin-right:13vw;
+    background-color: #212121;
+    border-radius: 20px;
+    border: 1px solid #181818;
+    box-sizing: border-box;
+    box-shadow:
+    0 0 8px rgba(255, 0, 255, 0.4),
+    0 0 18px rgba(0, 255, 255, 0.3),  
+    0 0 38px rgba(51, 51, 255, 0.2);
+    padding: 1.5vw;
+    /* perspective: 500px; */
+    transform: rotateX(20deg) skewX(-15deg);
+}
+
+.side_front_div header {
+    display:flex;
+    justify-content: space-around;
+    /* padding: 2vh; */
+}
+.front_header_right {
+    text-align: end;
+}
+.side_front_div main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* gap: 30%; */
+    width: 100%;
+    height: 80%;
+    /* padding-left: 10%; */
+    padding-top: 10%;
+    padding-bottom: 5%;
+    /* padding-left: 5%; */
+    /* padding-right: 5%; */
+    box-sizing: border-box;
+}
+
+#front_p_photo {
+    width:12vw;
+    height: 12vw;
+    /* background-repeat: no-repeat; */
+    object-fit: cover;
+    /* clip-path: circle(); */
+    border-radius: 50%; 
+    border: 1px solid #ff02ee;
+    box-shadow: 0 0 15px 6px #ff02ee
+}
+
+.front_details_div {
+    margin-top: 7%;
+    font-family: cursive;
+    font-size: 1rem;
+}
+
+.front_details_div span {
+    font-family: cursive;
+    color: #ff02ee;
+}
+.Neon_Button {
+    display:inline-block;
+    background-color: transparent;
+    color: #ff02ee;
+    border: 2px solid #ff02ee;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 0.6rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+.side_front_div footer {
+    margin-top: 10%;
+}
+#threeDots {
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 850px) {
+    .side_front_div {
+        display: none;
+    }
+    .back_div {
+        width: 100%;
+    }
+}
