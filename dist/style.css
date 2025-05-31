@@ -15,8 +15,9 @@ body {
 
 .back_div {
     background-color: #212121;
-    width:70vw;
+    width:80vw;
     height:90vh;
+    min-height: 500px;
     margin-left: 5vw;
     margin-right: 5vw;
     margin-top: 5vh;
@@ -76,8 +77,9 @@ body .back_div main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding:5vw;
-    padding-top: 20vh;
+    padding-inline: 10%;
+    padding-top: 0px;
+    padding-block: 4%;
     box-sizing: border-box;
     height: 60vh;
 }
@@ -94,16 +96,16 @@ main .back_details_div span{
     font-family: cursive;
     color:#ff02ee
 }
-.profile_photo_div .back_div main{
-    width: 90%;
+body .back_div main .profile_photo_div  {
+    width: 44%;
     text-align: center;
-    /* border-radius: 50%; */
-    /* border-radius: 50%; */
-    /* border: 10px solid #ff02ee; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 .profile_photo_div img {
-    width:clamp(250px,30vw,500px);
-    height: clamp(250px,30vw,500px);
+    width: clamp(200px,50vw,390px);
+    height: clamp(200px,50vw,390px);
     /* background-repeat: no-repeat; */
     object-fit: cover;
     /* clip-path: circle(); */
@@ -162,8 +164,8 @@ main .back_details_div span{
 }
 
 #front_p_photo {
-    width:12vw;
-    height: 12vw;
+    width:clamp(250px,40%,300px);
+    height: clamp(250px,40%,300px);
     /* background-repeat: no-repeat; */
     object-fit: cover;
     /* clip-path: circle(); */
@@ -177,6 +179,12 @@ main .back_details_div span{
     font-family: cursive;
     font-size: 1rem;
 }
+h1 {
+    font-size: clamp(25px,3rem,250px);
+}
+h2 {
+    font-size: clamp(20px,2rem,200px);
+}
 
 .front_details_div span {
     font-family: cursive;
@@ -189,7 +197,7 @@ main .back_details_div span{
     border: 2px solid #ff02ee;
     border-radius: 20px;
     padding: 10px;
-    font-size: 0.6rem;
+    font-size: 2rem;
     font-weight: 800;
     cursor: pointer;
 }
@@ -208,5 +216,56 @@ main .back_details_div span{
     }
     .back_div {
         width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        border-radius: 0px;
+        box-shadow: none;
     }
+    body {
+        background-color: #212121;
+    }
+
+
+}
+
+
+
+@media (max-width: 500px) {
+    .side_front_div {
+        display: none;
+    }
+    .back_div {
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        border-radius: 0px;
+        box-shadow: none;
+    }
+    body .back_div main {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: start;
+        align-items: center;
+        height: 100%;
+        gap: 40px;
+        padding: 0px;
+        padding-inline: 0px;
+        margin-block: 10%;
+    }
+    main .back_details_div {
+        width: 80%;
+    }
+    main .profile_photo_div {
+        width: 80%;
+    }
+    body {
+        background-color: #212121;
+        display: block;
+    }
+
+
 }
