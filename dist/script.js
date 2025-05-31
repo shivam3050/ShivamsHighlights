@@ -1,3 +1,4 @@
+alert("Width: " + window.innerWidth + ", Height: " + window.innerHeight);
 
 function downloadResumeFunction(event){ 
 
