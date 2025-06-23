@@ -146,14 +146,50 @@ nav a:hover {
     height: 280px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid var(--main-color);
-    box-shadow: 0 0 20px var(--main-color);
+    /* border: 1px solid var(--main-color); */
+    box-shadow: 0 0 5px 1px var(--main-color);
     transition: transform 0.4s ease;
 }
 
 .right img:hover {
     transform: scale(1.05);
 }
+
+
+.rotator-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    width: 320px;
+    overflow: hidden;
+
+}
+@keyframes rotator {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+    
+}
+.rotator-container > :nth-child(1){
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    background: linear-gradient(to top,var(--main-color),rgb(111, 0, 255));
+    animation: rotator 0.4s linear 0s infinite normal forwards;
+}
+
+.rotator-container > :nth-child(2){
+    height: 292px;
+    width: 292px;
+    z-index: 1;
+}
+
+
 
 @media screen and (max-width: 768px) {
     header {
