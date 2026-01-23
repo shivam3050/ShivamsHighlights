@@ -13,12 +13,16 @@
 }
 
 html, body {
-    height: 100%;
+
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-main);
     scroll-behavior: smooth;
 
+}
+body {
+    height: 100vh;
+    width: 100vw;
 }
 
 header {
@@ -39,12 +43,20 @@ header {
     font-family: var(--font-sec);
     font-size: 18px;
 }
+.clickable{
+    cursor: pointer;
+}
+nav {
+    display: flex;
+}
 
 nav a {
     color: white;
     margin: 0 15px;
     text-decoration: none;
+    text-align: center;
     font-weight: bold;
+  
     transition: color 0.3s;
 }
 
@@ -64,7 +76,7 @@ nav a:hover {
 .wrapper {
     max-width: 1200px;
     width: 100%;
-    display: flex;
+    display: none;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
@@ -87,6 +99,8 @@ nav a:hover {
 
 .highlight {
     color: var(--main-color);
+    cursor: pointer;
+  
 }
 
 .description {
@@ -146,7 +160,7 @@ nav a:hover {
     height: 280px;
     object-fit: cover;
     border-radius: 50%;
-    /* border: 1px solid var(--main-color); */
+    border: 1px dotted var(--main-color);
     box-shadow: 0 0 5px 1px var(--main-color);
     transition: transform 0.4s ease;
 }
@@ -187,6 +201,10 @@ nav a:hover {
     height: 292px;
     width: 292px;
     z-index: 1;
+}
+.active{
+    display: flex;
+
 }
 
 
@@ -230,4 +248,18 @@ nav a:hover {
     .socials {
         justify-content: center;
     }
+    .logo{
+        display: none;
+    }
+    /* .highlight::before{
+        content: "";
+        width:5px;
+        height: 5px;
+        border-radius: 50%;
+        display: inline-block;
+        background: var(--main-color);
+        margin-block: auto;
+       
+        
+    } */
 }
