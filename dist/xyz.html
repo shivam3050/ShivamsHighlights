@@ -25,8 +25,9 @@
       --glow: rgba(99, 102, 241, 0.3);
     }
 
+    /* Fixed scrollbar to be visible and draggable on desktop */
     ::-webkit-scrollbar {
-      width: 0px;
+      width: 4px;
       height: 6px;
     }
 
@@ -40,7 +41,7 @@
     }
 
     * {
-      scrollbar-width: none;
+      scrollbar-width: thin;
       scrollbar-color: var(--primary) transparent;
       margin: 0;
       padding: 0;
@@ -81,7 +82,7 @@
     .container {
       position: relative;
       width: 100%;
-      max-width: 540px;
+      max-width: 692px;
       z-index: 1;
     }
 
@@ -247,9 +248,7 @@
       min-height: 48px;
 
       white-space: nowrap;
-      /* Prevents the text from wrapping to a new line */
       overflow: hidden;
-      /* Hides any text that goes outside the container */
       text-overflow: ellipsis;
     }
 
@@ -465,7 +464,6 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-
       *,
       *::before,
       *::after {
@@ -476,7 +474,7 @@
 
     @media (max-width: 240px) {
       body {
-        height: 100vh;
+        /* Removed rigid height: 100vh here to prevent vertical scroll cutoff */
         position: relative
       }
 
@@ -569,22 +567,13 @@
         height: 100px;
       }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="card" onclick="event.stopPropagation(); document.getElementById('bookmarkMenu').style.display='none';">
+    <!-- Removed inline onclick here for better event delegation on document -->
+    <div class="card">
       <div class="welcome-text">
         <h1>Hello, Shivam!</h1>
         Eternity gave life its meaning: <br>
@@ -601,21 +590,21 @@
 
       <div class="links">
         <a href="#" id="jsrunner" target="_blank">JS Runner</a>
-        <a href="https://shivam3050.github.io/onlineCppCompiler.github.io/" id="jsrunner" target="_blank">C++ Runner
+        <!-- Fixed duplicate ID to avoid JS target collision -->
+        <a href="https://shivam3050.github.io/onlineCppCompiler.github.io/" id="cpprunner" target="_blank">C++ Runner
           Online</a>
-        <a
-          onclick="goNow('https://raw.githubusercontent.com/shivam3050/gov-exams-quiz/main/english_temp_prep.html_encrypted.json')">Vocabulary</a>
+        <a onclick="goNow('https://raw.githubusercontent.com/shivam3050/gov-exams-quiz/main/english_temp_prep.html_encrypted.json')">Vocabulary</a>
         <a href="https://chatgpt.com/" target="_blank">ChatGPT</a>
-        <a
-          onclick="goNow('https://raw.githubusercontent.com/shivam3050/gov-exams-quiz/main/question_trainer_html.html_encrypted.json')">ExamsTrainer</a>
+        <a onclick="goNow('https://raw.githubusercontent.com/shivam3050/gov-exams-quiz/main/question_trainer_html.html_encrypted.json')">ExamsTrainer</a>
         <a href="https://shivam3050.github.io/LiveQRScanner.github.io/" target="_blank">QR Scanner</a>
-        <a href="https://shivam3050.github.io/pdf_all_rounder.github.io/">PDF All Rounder</a>
-        <a href="https://shivam3050.github.io/drawIdeas/">Draw Ideas</a>
+        <a href="https://shivam3050.github.io/pdf_all_rounder.github.io/" target="_blank">PDF All Rounder</a>
+        <a href="https://shivam3050.github.io/drawIdeas/" target="_blank">Draw Ideas</a>
       </div>
     </div>
 
     <div class="dropdown">
-      <input type="button" value="🔖" class="dropdown-btn" onclick="toggleDropdown()">
+      <!-- Passed event object to toggleDropdown -->
+      <input type="button" value="🔖" class="dropdown-btn" onclick="toggleDropdown(event)">
       <div class="dropdown-content" id="bookmarkMenu">
         <section>
           <input type="text" id="bookmarkInput" placeholder="Enter URL and hit Enter" onkeydown="handleKey(event)" />
@@ -629,12 +618,17 @@
   <script>
     const fileUrl = "file:///C:/Users/LENOVO/OneDrive/Desktop/DUSTBIN/garbage.html";
     const webUrl = "https://jsrunner.onrender.com";
-    const link = document.getElementById("jsrunner");
 
-    link.addEventListener("click", () => {
-
-      link.href = navigator.onLine ? webUrl : fileUrl;
-    });
+    // Encapsulated JS runner setup so it can re-bind after duplicating nodes
+    function setupJsRunnerLinks() {
+      const links = document.querySelectorAll("#jsrunner");
+      links.forEach(link => {
+        link.addEventListener("click", () => {
+          link.href = navigator.onLine ? webUrl : fileUrl;
+        });
+      });
+    }
+    setupJsRunnerLinks();
 
     async function goNow(url) {
       const pwd = prompt("Enter password:");
@@ -726,17 +720,28 @@
     });
 
     document.addEventListener('gesturestart', e => e.preventDefault());
+    
+    // MAJOR FIX: `e.scale` is deprecated/Apple-only and disabled touch scrolling on Androids.
     document.addEventListener('touchmove', e => {
-      if (e.scale !== 1) e.preventDefault();
+      if (e.touches && e.touches.length > 1) e.preventDefault();
     }, { passive: false });
 
     const menu = document.getElementById('bookmarkMenu');
     const input = document.getElementById('bookmarkInput');
     const list = document.getElementById('bookmarkList');
 
-    function toggleDropdown() {
+    // ROBUST DROPDOWN FIX
+    function toggleDropdown(e) {
+      if(e) e.stopPropagation();
       menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
+
+    // Hide dropdown reliably when clicking anywhere outside of it
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dropdown')) {
+        menu.style.display = 'none';
+      }
+    });
 
     function handleKey(e) {
       if (e.key === 'Enter') {
@@ -813,45 +818,43 @@
 
     document.addEventListener('DOMContentLoaded', loadBookmarks);
 
-
-
-
-
-    // Continuous downward scrolling
     const linksContainer = document.querySelector('.links');
-    let scrollSpeed = 0.8; // Adjust for faster/slower scrolling
+    let scrollSpeed = 0.8; 
+    let isScrollPaused = false; // Prevents auto-scroll from fighting user touches
+
+    // Pause scrolling when user hovers or touches the links grid
+    linksContainer.addEventListener('mouseenter', () => isScrollPaused = true);
+    linksContainer.addEventListener('mouseleave', () => isScrollPaused = false);
+    linksContainer.addEventListener('touchstart', () => isScrollPaused = true, {passive: true});
+    linksContainer.addEventListener('touchend', () => isScrollPaused = false);
 
     function autoScrollUp() {
-      linksContainer.scrollTop += scrollSpeed; // Scroll downward
-
-      // Smoothly loop back when reaching bottom
-      if (linksContainer.scrollTop >= linksContainer.scrollHeight / 2) {
-        linksContainer.scrollTop = 0;
+      if (!isScrollPaused) {
+        linksContainer.scrollTop += scrollSpeed;
+        if (linksContainer.scrollTop >= linksContainer.scrollHeight / 2) {
+          linksContainer.scrollTop = 0;
+        }
       }
-
       requestAnimationFrame(autoScrollUp);
     }
 
-    // Duplicate the links content for seamless loop
-    // function duplicateLinks() {
-    //   const links = linksContainer.innerHTML;
-    //   linksContainer.innerHTML = links + links; // Double the content
-    // }
+    // Uncommented and updated to re-bind JS runner listeners post-duplication
+    function duplicateLinks() {
+       const links = linksContainer.innerHTML;
+       linksContainer.innerHTML = links + links; 
+       setupJsRunnerLinks(); 
+    }
 
-    // Start everything only on screens smaller than 560px
     document.addEventListener('DOMContentLoaded', () => {
       if (window.innerWidth < 600) {
-        duplicateLinks();
+        duplicateLinks(); // No longer throws a reference error
         setTimeout(() => {
-          linksContainer.scrollTop = 0; // Start at top
+          linksContainer.scrollTop = 0;
           autoScrollUp();
         }, 500);
       }
     });
   </script>
-
 </body>
 
 </html>
-
-
